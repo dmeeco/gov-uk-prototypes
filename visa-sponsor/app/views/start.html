@@ -1,0 +1,137 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Sponsor a visa applicant
+{% endblock %}
+
+{% block header %}
+  <!-- Blank header with no service name for the start page -->
+  {{ govukHeader() }}
+{% endblock %}
+
+{% block beforeContent %}
+{% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
+{{ govukPhaseBanner({
+  tag: {
+    text: "alpha"
+  },
+  html: 'This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.'
+}) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-xl">
+        {% if serviceName %} {{ serviceName }} {% endif %}
+      </h1>
+
+      <p class="govuk-body-l">Use this service to confirm that you will sponsor a person applying to settle in the UK. Also known as the "Sponsorship undertaking: form SU07".</p>
+      <p class="govuk-body">This is to confirm that you will be responsible for the applicant’s maintenance, accommodation and care, without relying on public funds for at least 5 years, if they are applying to settle.</p>
+
+      <p>You can’t apply for this service if you’re in the UK illegally.</p>
+
+      <a href="/details-sponsered-person" role="button" draggable="false" class="govuk-button govuk-button--start govuk-!-margin-top-2 govuk-!-margin-bottom-8"  data-module="govuk-button">
+        Start now
+        <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"></path>
+        </svg>
+      </a>
+
+      <h2 class="govuk-heading-m">Before you start</h2>
+
+      {% from "govuk/components/tabs/macro.njk" import govukTabs %}
+      {% from "govuk/components/table/macro.njk" import govukTable %}
+
+      {% set whatYouNeed %}
+      <p>Takes around 10 to 15 minutes and you'll need:
+        <ul class="govuk-list govuk-list--bullet">
+          <li>your National Insurance(NI) number</li>
+          <li>your employment details such as company name and full address with postcode</li>
+          <li>an email address for each person signing the application</li>
+          <li>one or more <a href="/start#documents-required">documents </a>(opens in a section tab) from the list</li>
+        </ul>
+
+      {% endset -%}
+
+      {% set documentsRequired %}
+      <p>Note: The sponsor should provide evidence that he/she lives at the address given above. This evidence should include one or more documents from the list below.</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>Certified copy of deeds of sponsor's house</li>
+        <li>Letter from building society/bank confirming they hold a mortgage for the sponsor</li>
+        <li>Housing association/council rent book or other council letter confirming address of sponsor</li>
+        <li>Bill from a utility company (gas, water etc.)</li>
+        <li>Local authority letter (council tax)</li>
+        <li>Letter from any government department</li>
+      </ul>
+      <p>Please note that applicants must also provide evidence of their sponsor's ability to maintain and accommodate them without recourse to public funds.</p>
+      {% endset -%}
+
+      {{ govukTabs({
+        items: [
+          {
+            label: "What you need to know",
+            id: "what-you-need",
+            panel: {
+              html: whatYouNeed
+            }
+          },
+          {
+            label: "Documents required",
+            id: "documents-required",
+            panel: {
+              html: documentsRequired
+            }
+          }
+        ]
+      }) }}
+
+
+      <aside class="app-related-items" role="complementary">
+        <h2 class="govuk-heading-m" id="subsection-title">
+          Explore the topic
+        </h2>
+        <nav role="navigation" aria-labelledby="subsection-title">
+          <ul class="govuk-list govuk-!-font-size-16">
+            <li>
+              <a class="govuk-body govuk-!-font-weight-bold" href="https://www.gov.uk/entering-staying-uk/visa-sponsorship">
+                Visa sponsorship
+              </a>
+            </li>
+            <li>
+              <a class="govuk-body govuk-!-font-weight-bold" href="https://www.gov.uk/entering-staying-uk/settlement">
+                Settlement
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+    </div>
+
+    <div class="govuk-grid-column-one-third">
+
+      <aside class="app-related-items" role="complementary">
+        <h2 class="govuk-heading-m" id="subsection-title">
+          Related content
+        </h2>
+        <nav role="navigation" aria-labelledby="subsection-title">
+          <ul class="govuk-list govuk-!-font-size-16">
+            <li>
+              <a href="https://www.gov.uk/government/publications/application-for-uk-visa-to-visit-or-for-short-term-stay-form-vaf1a">
+                Application for UK visa to visit or for short-term stay: form VAF1A
+              </a>
+            </li>
+            <li>
+              <a href="https://www.gov.uk/government/publications/application-for-uk-visa-for-family-settlement-form-vaf4a">
+                Application for UK visa for family settlement: form VAF4A and appendix 2
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+    </div>
+  </div>
+{% endblock %}

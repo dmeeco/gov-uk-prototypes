@@ -1,0 +1,109 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Sponsor's Details
+{% endblock %}
+
+{% block beforeContent %}
+  {% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
+  {{ govukPhaseBanner({
+  tag: {
+    text: "alpha"
+  },
+  html: 'This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.'
+  }) }}
+  <a class="govuk-back-link" href="javascript:window.history.back()">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">Sponsor's Details:</h1>
+
+      <p class="govuk-body-m">
+        You will need to enter details of the sponsoring person.
+      </p>
+
+      <form class="form" action="/find-postcode-sponsor" method="post">
+
+        {% from "govuk/components/input/macro.njk" import govukInput %}
+        {% from "govuk/components/date-input/macro.njk" import govukDateInput %}
+
+        {{ govukInput({
+          label: {
+            text: "First and middle names",
+            classes: "govuk-label--m",
+            isPageHeading: true
+          },
+          classes: "govuk-!-width-two-thirds",
+          id: "sponsor-fname",
+          name: "sponsor-fname"
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "Last name",
+            classes: "govuk-label--m",
+            isPageHeading: true
+          },
+          classes: "govuk-!-width-two-thirds",
+          id: "sponsonr-lname",
+          name: "sponsor-lname"
+        }) }}
+
+        {{ govukDateInput({
+          id: "adob",
+          namePrefix: "adob",
+          fieldset: {
+            legend: {
+              text: "Date of birth",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          hint: {
+            text: "For example, 31 3 1980"
+          },
+          items: [
+            {
+              name: "day",
+              classes: "govuk-input--width-2",
+              autocomplete: "bday-day"
+            },
+            {
+              name: "month",
+              classes: "govuk-input--width-2",
+              autocomplete: "bday-month"
+            },
+            {
+              name: "year",
+              classes: "govuk-input--width-4",
+              autocomplete: "bday-year"
+            }
+          ]
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "National Insurance number",
+            classes: "govuk-label--m",
+            isPageHeading: true
+          },
+          hint: {
+            text: "It’s on your National Insurance card, benefit letter, payslip or P60. For example, ‘QQ 12 34 56 C’."
+          },
+          classes: "govuk-input--width-10",
+          id: "national-insurance-number",
+          name: "national-insurance-number",
+          spellcheck: false
+        }) }}
+
+        <button class="govuk-button" data-module="govuk-button">Continue</button>
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

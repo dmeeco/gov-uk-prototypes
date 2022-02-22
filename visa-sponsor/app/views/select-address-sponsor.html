@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Select address
+{% endblock %}
+
+{% block beforeContent %}
+  {% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
+  {{ govukPhaseBanner({
+    tag: {
+      text: "alpha"
+    },
+    html: 'This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.'
+  }) }}
+  <a class="govuk-back-link" href="javascript:window.history.back()">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">Home address</h1>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Postcode
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data['address-postcode-s'] }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a href="/find-postcode-sponsor">
+            Change
+            <span class="govuk-visually-hidden"> postcode</span>
+          </a>
+        </dd>
+      </div>
+      </dl>
+
+      <form class="form" action="/sponsor-employment-details" method="post">
+
+        {% from "govuk/components/select/macro.njk" import govukSelect %}
+
+        {{ govukSelect({
+          id: "sponsor-selected-address",
+          name: "sponsor-selected-address",
+          label: {
+            text: "Select an address",
+            classes: "govuk-label--m",
+            isPageHeading: true
+          },
+          items: [
+            {
+              value: "addresses",
+              text: "1 addresses found",
+              selected: true
+            },
+            {
+              value: "Buckingham Palace, LONDON SW1A 1AA",
+              text: "Buckingham Palace, LONDON SW1A 1AA"
+            }
+          ]
+        }) }}
+
+        <button class="govuk-button" data-module="govuk-button">Continue</button>
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
