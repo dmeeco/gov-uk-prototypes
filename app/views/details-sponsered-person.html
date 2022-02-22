@@ -1,0 +1,118 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Applicant's Details
+{% endblock %}
+
+{% block beforeContent %}
+{% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
+{{ govukPhaseBanner({
+  tag: {
+    text: "ALPHA"
+  },
+  html: 'This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.'
+}) }}
+  <a class="govuk-back-link" href="javascript:window.history.back()">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">Applicant's Details:</h1>
+
+      <p class="govuk-body-m">
+        You will need to fill the sponsored person's details.
+      </p>
+
+      <form class="form" action="/find-postcode" method="post">
+
+        {% from "govuk/components/input/macro.njk" import govukInput %}
+        {% from "govuk/components/date-input/macro.njk" import govukDateInput %}
+
+        {{ govukInput({
+          label: {
+            text: "First and middle names",
+            classes: "govuk-label--m",
+            isPageHeading: true
+          },
+          classes: "govuk-!-width-two-thirds",
+          id: "first-name",
+          name: "first-name"
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "Last name",
+            classes: "govuk-label--m",
+            isPageHeading: true
+          },
+          classes: "govuk-!-width-two-thirds",
+          id: "last-name",
+          name: "last-name"
+        }) }}
+
+        {{ govukDateInput({
+          id: "sdob",
+          namePrefix: "sdob",
+          fieldset: {
+            legend: {
+              text: "Date of birth",
+              classes: "govuk-fieldset__legend--m"
+            }
+          },
+          hint: {
+            text: "For example, 31 3 1980"
+          },
+          items: [
+            {
+              name: "day",
+              classes: "govuk-input--width-2",
+              autocomplete: "bday-day"
+            },
+            {
+              name: "month",
+              classes: "govuk-input--width-2",
+              autocomplete: "bday-month"
+            },
+            {
+              name: "year",
+              classes: "govuk-input--width-4",
+              autocomplete: "bday-year"
+            }
+          ]
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "Place of birth",
+            classes: "govuk-label--m",
+            isPageHeading: true
+          },
+          classes: "govuk-!-width-two-thirds",
+          id: "birth-place",
+          name: "birth-place"
+        }) }}
+
+        {{ govukInput({
+          label: {
+            text: "Nationality",
+            classes: "govuk-label--m",
+            isPageHeading: true
+          },
+          classes: "govuk-!-width-two-thirds",
+          id: "nationality",
+          name: "nationality"
+        }) }}
+
+
+
+        <button class="govuk-button" data-module="govuk-button">Continue</button>
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

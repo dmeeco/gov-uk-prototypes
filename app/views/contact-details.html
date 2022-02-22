@@ -1,0 +1,113 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Contact Details
+{% endblock %}
+
+{% block beforeContent %}
+  {% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
+  {{ govukPhaseBanner({
+  tag: {
+    text: "alpha"
+  },
+  html: 'This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.'
+  }) }}
+  <a class="govuk-back-link" href="javascript:window.history.back()">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form class="form" action="/check-application" method="post">
+
+        {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+        {% from "govuk/components/input/macro.njk" import govukInput %}
+
+        {% set emailHtml %}
+        {{ govukInput({
+          id: "contact-by-email",
+          name: "contact-by-email",
+          type: "email",
+          autocomplete: "email",
+          spellcheck: false,
+          classes: "govuk-!-width-one-third",
+          label: {
+            text: "Email address"
+          }
+        }) }}
+        {% endset -%}
+
+        {% set phoneHtml %}
+        {{ govukInput({
+          id: "contact-by-phone",
+          name: "contact-by-phone",
+          type: "tel",
+          autocomplete: "tel",
+          classes: "govuk-!-width-one-third",
+          label: {
+            text: "Phone number"
+          }
+        }) }}
+        {% endset -%}
+
+        {% set textHtml %}
+        {{ govukInput({
+          id: "contact-by-text",
+          name: "contact-by-text",
+          type: "tel",
+          autocomplete: "tel",
+          classes: "govuk-!-width-one-third",
+          label: {
+            text: "Mobile phone number"
+          }
+        }) }}
+        {% endset -%}
+
+        {{ govukCheckboxes({
+          idPrefix: "contact",
+          name: "contact",
+          fieldset: {
+            legend: {
+              text: "How would you like to be contacted?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          hint: {
+            text: "Select all options that are relevant to you or have access to. We may contact you to send updates and if there's a problem with your application."
+          },
+          items: [
+            {
+              value: "email",
+              text: "Email",
+              conditional: {
+                html: emailHtml
+              }
+            },
+            {
+              value: "phone",
+              text: "Phone",
+              conditional: {
+                html: phoneHtml
+              }
+            },
+            {
+              value: "text message",
+              text: "Text message",
+              conditional: {
+                html: textHtml
+              }
+            }
+          ]
+        }) }}
+
+        <button class="govuk-button" data-module="govuk-button">Continue</button>
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

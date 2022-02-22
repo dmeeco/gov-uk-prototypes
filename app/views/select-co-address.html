@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Select address
+{% endblock %}
+
+{% block beforeContent %}
+  {% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
+  {{ govukPhaseBanner({
+  tag: {
+    text: "alpha"
+  },
+  html: 'This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.'
+  }) }}
+  <a class="govuk-back-link" href="javascript:window.history.back()">Back</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">Work address</h1>
+
+      <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Postcode
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ data['address-postcode-c'] }}
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a href="/find-co-postcode">
+            Change
+            <span class="govuk-visually-hidden"> postcode</span>
+          </a>
+        </dd>
+      </div>
+      </dl>
+
+      <form class="form" action="/contact-details" method="post">
+
+        {% from "govuk/components/select/macro.njk" import govukSelect %}
+
+        {{ govukSelect({
+          id: "selected-address-c",
+          name: "selected-address-c",
+          label: {
+            text: "Select an address",
+            classes: "govuk-label--m",
+            isPageHeading: true
+          },
+          items: [
+            {
+              value: "addresses",
+              text: "1 addresses found",
+              selected: true
+            },
+            {
+              value: "250-252 Earls Court Road W.8, LONDON SW5 9AD",
+              text: "250-252 Earls Court Road W.8, LONDON SW5 9AD"
+            }
+          ]
+        }) }}
+
+        <p><a href="/address-manual">I can’t find my address in the list</a> </p>
+        <button class="govuk-button" data-module="govuk-button">Continue</button>
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
