@@ -20,8 +20,6 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-l">Enter Home address</h1>
-
       <form class="form" action="/details-undertaking-sponsor" method="post">
 
         {% from "govuk/components/input/macro.njk" import govukInput %}
@@ -29,7 +27,7 @@
 
         {% call govukFieldset({
           legend: {
-            text: "What is your address?",
+            text: "Enter Home address",
             classes: "govuk-fieldset__legend--l",
             isPageHeading: true
           }
